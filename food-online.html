@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Food Order System</title>
+  <style>
+    /* Reset CSS */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      background: #ff5722;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    header h1 {
+      font-size: 2rem;
+    }
+
+    nav {
+      margin-top: 10px;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .hero {
+      background: url("https://images.unsplash.com/photo-1600891964092-4316c288032e") center/cover no-repeat;
+      height: 350px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-shadow: 1px 1px 8px black;
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 40px auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2rem;
+      color: #ff5722;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 15px;
+    }
+
+    .card-content h3 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .card-content p {
+      font-size: 14px;
+      margin-bottom: 10px;
+      color: #555;
+    }
+
+    .card-content .price {
+      font-weight: bold;
+      color: #ff5722;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #ff5722;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background: #e64a19;
+    }
+
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>🍴 Online Food Order</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Menu</a>
+      <a href="#">Order</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h2>Delicious Food Delivered To You</h2>
+  </section>
+
+  <!-- Menu Section -->
+  <div class="container">
+    <h2 class="section-title">Our Menu</h2>
+    <div class="menu-grid">
+      <!-- Card 1 -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1604908176997-3a89fa78a36a" alt="Burger">
+        <div class="card-content">
+          <h3>Cheese Burger</h3>
+          <p>Juicy beef burger with fresh cheese & veggies.</p>
+          <span class="price">৳250</span>
+          <a href="#" class="btn">Order Now</a>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1627308595229-7830a5c91f9f" alt="Pizza">
+        <div class="card-content">
+          <h3>Chicken Pizza</h3>
+          <p>Loaded with cheese, chicken & spicy toppings.</p>
+          <span class="price">৳550</span>
+          <a href="#" class="btn">Order Now</a>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add" alt="Pasta">
+        <div class="card-content">
+          <h3>Italian Pasta</h3>
+          <p>Authentic Italian pasta with creamy sauce.</p>
+          <span class="price">৳400</span>
+          <a href="#" class="btn">Order Now</a>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1589308078054-832c32f72a44" alt="Salad">
+        <div class="card-content">
+          <h3>Fresh Salad</h3>
+          <p>Healthy & delicious salad with fresh veggies.</p>
+          <span class="price">৳200</span>
+          <a href="#" class="btn">Order Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Online Food Order | All Rights Reserved</p>
+  </footer>
+
+</body>
+</html>
