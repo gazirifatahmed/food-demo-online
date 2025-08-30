@@ -11,84 +11,66 @@
     :root{
       --bg:#0b1220; --fg:#e5e7eb; --muted:#94a3b8; --card:#0f172a;
       --brand1:#2563eb; --brand2:#9333ea; --brand3:#f59e0b;
-      --accent:#22c55e; --danger:#ef4444; --ring:0 0 0 3px rgba(99,102,241,.35);
-      --radius:14px; --header-h:56px; --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --radius:10px;
     }
     *{box-sizing:border-box}
-    body{font-family:'Inter',sans-serif;background:radial-gradient(1200px 800px at -10% -10%, #1e293b 0%, transparent 60%),radial-gradient(1000px 700px at 110% -20%, #172554 0%, transparent 60%),radial-gradient(1000px 700px at 50% 120%, #3b0764 0%, transparent 60%),var(--bg);margin:0;color:var(--fg)}
+    body{font-family:'Inter',sans-serif;background:#0b1220;margin:0;color:#e5e7eb}
     img{max-width:100%;display:block}
 
     /* Header */
-    header{position:sticky;top:0;z-index:50;background:linear-gradient(90deg,var(--brand1),var(--brand2));color:#fff;box-shadow:0 6px 24px rgba(0,0,0,.25);height:var(--header-h)}
-    .nav{height:100%;display:flex;justify-content:space-between;align-items:center;padding:8px 14px}
-    .brand{display:flex;align-items:center;gap:8px;font-weight:800}
-    .brand .logo{width:32px;height:32px;border-radius:10px;background:conic-gradient(from 180deg,var(--brand1),var(--brand2),var(--brand3));display:grid;place-items:center}
-    .actions{display:none}
+    header{position:sticky;top:0;z-index:50;background:linear-gradient(90deg,#2563eb,#9333ea);color:#fff;box-shadow:0 6px 24px rgba(0,0,0,.25)}
+    .nav{display:flex;justify-content:space-between;align-items:center;padding:10px 16px}
+    .brand{font-weight:800;display:flex;align-items:center;gap:8px}
 
-    /* Buttons */
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 14px;border-radius:12px;border:1px solid transparent;font-weight:700;cursor:pointer;transition:filter .15s ease, transform .12s ease}
-    .btn:active{transform:translateY(1px)}
-    .btn.primary{background:linear-gradient(135deg,var(--brand1),var(--brand2));color:#fff}
-    .btn.secondary{background:#1e293b;color:#fff}
-    .btn.danger{background:linear-gradient(135deg,#ef4444,#f43f5e);color:#fff}
+    /* Buttons + badges */
+    .btn{padding:10px 14px;border-radius:8px;font-weight:700;cursor:pointer;border:none;position:relative;display:inline-flex;align-items:center;gap:6px}
+    .btn.primary{background:#2563eb;color:#fff}
+    .btn.secondary{background:#334155;color:#fff}
+    .btn.danger{background:#dc2626;color:#fff}
+    .badge{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:#0b1220;border:1px solid rgba(148,163,184,.35);color:#fff;font-size:12px;line-height:1;position:absolute;top:-6px;right:-6px}
+    .count-badge{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;border-radius:999px;background:#ef4444;color:#fff;font-size:11px;padding:0 5px;margin-left:6px}
+    .hidden{display:none !important;}
 
     /* Layout */
     .container{padding:16px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
-    .card{background:linear-gradient(180deg,#1e293b,#0f172a);padding:12px;border-radius:var(--radius);box-shadow:0 2px 10px rgba(0,0,0,.25);display:flex;flex-direction:column}
-    .card img{width:100%;height:140px;object-fit:cover;border-radius:12px}
-    .meta{margin:8px 2px 4px}
-    .meta .title{font-weight:800;font-size:18px}
-    .meta .sub{color:var(--muted)}
-    .cta{display:flex;gap:10px;align-items:center;margin-top:8px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+    .card{background:#1e293b;padding:12px;border-radius:var(--radius);box-shadow:0 2px 8px rgba(0,0,0,.3);display:flex;flex-direction:column}
+    .card img{width:100%;height:140px;object-fit:cover;border-radius:8px}
+    .meta{margin-top:8px}
+    .title{font-weight:800;font-size:16px}
+    .sub{color:var(--muted)}
+    .cta{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
     .price{font-weight:800}
-    .cta .btn{flex:1}
 
     /* Cart */
-    .cart{background:#0f172a;padding:14px;border-radius:var(--radius);color:#e5e7eb;margin-top:12px}
-    .cart-row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:6px 0}
-    .cart-row .qty{display:flex;gap:6px}
-    .cart-total{display:flex;justify-content:space-between;padding-top:6px;margin-top:6px;border-top:1px dashed #334155}
+    .cart{background:#0f172a;padding:14px;border-radius:10px;margin-top:10px}
+    .cart-row{display:flex;justify-content:space-between;align-items:center;margin:6px 0}
+    .cart-row .qty{display:flex;gap:6px;align-items:center}
+    .cart-total{display:flex;justify-content:space-between;margin-top:8px}
 
-    /* Bottom nav (mobile) */
-    .mobile-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(2,6,23,.95);backdrop-filter:blur(8px);display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #1e293b;z-index:60}
-    .mobile-nav button{background:none;border:none;color:#e5e7eb;font-size:14px;padding:10px 0;font-weight:700}
-    .mobile-nav button.active{color:#fff;background:linear-gradient(90deg,rgba(37,99,235,.25),rgba(147,51,234,.25))}
+    footer{text-align:center;padding:16px;background:#0b1120;color:#9ca3af}
 
     /* Pages */
     section.page{display:none}
     section.page.active{display:block}
 
-    /* Invoice */
-    #invoice .paper{background:#fff;color:#111;border-radius:12px;padding:16px}
-    #invoice table{width:100%;border-collapse:collapse}
-    #invoice th,#invoice td{border-bottom:1px solid #e5e7eb;padding:8px;text-align:left}
-    #invoice .right{text-align:right}
-
-    footer{text-align:center;padding:16px;background:#0b1120;color:#94a3b8;margin-bottom:calc(56px + var(--safe-bottom))}
-
-    dialog{border:none;border-radius:12px;width:90%;max-width:420px}
-    dialog form{display:flex;flex-direction:column;gap:10px;padding:12px}
-    input,textarea,select{padding:12px;border-radius:10px;border:1px solid #334155;background:#0b1220;color:#fff;width:100%}
-    input:focus,textarea:focus,select:focus{outline:none;box-shadow:var(--ring)}
-
-    @media(min-width:768px){
-      .actions{display:flex;gap:8px}
-      .mobile-nav{display:none}
-      footer{margin-bottom:0}
-      .grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
-      .card img{height:160px}
+    /* Mobile tweaks */
+    @media(max-width:768px){
+      .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+      .btn{padding:12px}
     }
   </style>
 </head>
 <body>
   <header>
     <div class="nav">
-      <div class="brand"><div class="logo">🍔</div> ProFood</div>
+      <div class="brand">🍔 ProFood</div>
       <div class="actions">
         <button class="btn secondary" data-route="home">Home</button>
         <button class="btn secondary" data-route="menu">Menu</button>
-        <button class="btn secondary" data-route="cart">Cart</button>
+        <button class="btn secondary" data-route="cart">
+          Cart <span id="cartCount" class="count-badge hidden">0</span>
+        </button>
         <button class="btn secondary" data-route="about">About</button>
       </div>
     </div>
@@ -96,85 +78,32 @@
 
   <section id="home" class="page active container">
     <h1>Fresh, Fast & Colorful 🍕🍔</h1>
-    <p>Order now and get delivery in 30–45 mins</p>
-    <button class="btn primary" data-route="menu">See Menu</button>
+    <p>Delivery in 30–45 mins</p>
+    <button class="btn primary" data-route="menu">Order Now</button>
   </section>
 
   <section id="menu" class="container page">
     <h2>Menu</h2>
-    <div id="menuList" class="grid" aria-live="polite"></div>
+    <div id="menuList" class="grid"></div>
   </section>
 
   <section id="cart" class="container page">
     <h2>Your Cart</h2>
     <div id="cartEmpty">Cart is empty.</div>
     <div id="cartList" hidden></div>
-    <div class="cart-total"><span>Subtotal</span><span id="subTotal">৳0</span></div>
-    <div class="cart-total"><span>VAT (5%)</span><span id="vat">৳0</span></div>
-    <div class="cart-total"><span>Total</span><span id="grandTotal">৳0</span></div>
-    <div style="display:flex;gap:8px;margin-top:10px">
-      <button class="btn secondary" id="clearCartBtn">Clear</button>
+    <div class="cart-total"><strong>Subtotal:</strong> <span id="subTotal">৳0</span></div>
+    <div class="cart-total"><strong>VAT (5%):</strong> <span id="vat">৳0</span></div>
+    <div class="cart-total"><strong>Total:</strong> <span id="grandTotal">৳0</span></div>
+    <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn danger" id="clearCartBtn">Clear</button>
       <button class="btn primary" id="checkoutBtn">Checkout</button>
     </div>
   </section>
 
   <section id="about" class="container page">
-    <h2>About</h2>
-    <p>ProFood is founded by <strong>Gazi Rifat Ahmed</strong> to make food ordering modern and colorful.</p>
+    <h2>About Us</h2>
+    <p>Founded by <strong>Gazi Rifat Ahmed</strong> to modernize food ordering.</p>
   </section>
-
-  <section id="invoice" class="container page">
-    <div class="paper">
-      <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center">
-        <div>
-          <h2>Invoice</h2>
-          <div class="muted">Rifat's Food House</div>
-        </div>
-        <div style="text-align:right">
-          <div id="invNo" style="font-weight:800">#PF-XXXX</div>
-          <div id="invDate" class="muted">Date</div>
-        </div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0">
-        <div>
-          <strong>Billed To</strong>
-          <div id="billToName">—</div>
-          <div id="billToPhone" class="muted">—</div>
-          <div id="billToAddr" class="muted">—</div>
-        </div>
-        <div>
-          <strong>Payment</strong>
-          <div>Method: <span id="billPay">—</span></div>
-          <div>Status: <span id="payStatus">—</span></div>
-        </div>
-      </div>
-      <table id="invTable"><thead><tr><th>Item</th><th>Qty</th><th class="right">Price</th><th class="right">Total</th></tr></thead><tbody></tbody></table>
-      <div class="cart-total"><span>Subtotal</span><span id="tSub">৳0</span></div>
-      <div class="cart-total"><span>VAT (5%)</span><span id="tVat">৳0</span></div>
-      <div class="cart-total"><span><strong>Grand Total</strong></span><span id="tGrand"><strong>৳0</strong></span></div>
-      <button id="printInvoiceBtn" class="btn secondary" style="margin-top:10px">Print / Download</button>
-    </div>
-  </section>
-
-  <nav class="mobile-nav" aria-label="Quick Navigation">
-    <button data-route="home">Home</button>
-    <button data-route="menu">Menu</button>
-    <button data-route="cart">Cart</button>
-    <button data-route="about">About</button>
-  </nav>
-
-  <dialog id="checkoutModal">
-    <form id="orderForm">
-      <label>Name<input name="name" required autocomplete="name" inputmode="text"></label>
-      <label>Phone<input name="phone" required autocomplete="tel" inputmode="tel" pattern="[0-9]{11}"></label>
-      <label>Address<textarea name="address" required rows="3" placeholder="House, Road, Area, City"></textarea></label>
-      <label>Payment<select name="payment" required><option value="COD">Cash on Delivery</option><option value="bKash">bKash</option><option value="Nagad">Nagad</option></select></label>
-      <div style="display:flex;gap:8px;justify-content:flex-end">
-        <button type="reset" class="btn secondary" id="cancelCheckoutBtn">Cancel</button>
-        <button type="submit" class="btn primary">Confirm</button>
-      </div>
-    </form>
-  </dialog>
 
   <footer>© <span id="y"></span> ProFood</footer>
 
@@ -194,149 +123,144 @@
     ];
 
     // ======= State & Elements =======
-    const state={cart:{}, lastOrder:null};
+    const state={cart:{}}; // cart: { [id]: {item, qty} }
     const menuList=document.getElementById('menuList');
     const cartList=document.getElementById('cartList');
     const cartEmpty=document.getElementById('cartEmpty');
+    const cartCount=document.getElementById('cartCount');
     const subTotalEl=document.getElementById('subTotal');
     const vatEl=document.getElementById('vat');
     const grandTotalEl=document.getElementById('grandTotal');
 
-    // Invoice elements
-    const invNo=document.getElementById('invNo');
-    const invDate=document.getElementById('invDate');
-    const billToName=document.getElementById('billToName');
-    const billToPhone=document.getElementById('billToPhone');
-    const billToAddr=document.getElementById('billToAddr');
-    const billPay=document.getElementById('billPay');
-    const payStatus=document.getElementById('payStatus');
-    const invBody=document.querySelector('#invTable tbody');
-    const tSub=document.getElementById('tSub');
-    const tVat=document.getElementById('tVat');
-    const tGrand=document.getElementById('tGrand');
-
-    // Helpers
-    const fmt = n => `৳${n}`;
-    function totals(){ const items=Object.values(state.cart); const sub=items.reduce((s,c)=>s+c.qty*c.item.price,0); const vat=Math.round(sub*0.05); return {sub,vat,grand:sub+vat}; }
+    const fmt=n=>`৳${n}`;
+    const totalCount=()=>Object.values(state.cart).reduce((s,c)=>s+c.qty,0);
+    function totals(){
+      const items=Object.values(state.cart);
+      const sub=items.reduce((s,c)=>s+c.qty*c.item.price,0);
+      const vat=Math.round(sub*0.05);
+      return {sub,vat,grand:sub+vat};
+    }
 
     function renderMenu(){
       menuList.innerHTML='';
       MENU.forEach(item=>{
         const card=document.createElement('div');
         card.className='card';
-        card.innerHTML=`
-          <img src="${item.img}" alt="${item.name}" loading="lazy">
-          <div class="meta">
-            <div class="title">${item.name}</div>
-            <div class="sub">Fresh & hot • 30–45 mins</div>
-          </div>
-          <div class="cta">
-            <div class="price">${fmt(item.price)}</div>
-            <button class="btn primary" data-id="${item.id}">Add</button>
-          </div>`;
+        card.innerHTML=
+          `<img src="${item.img}" alt="${item.name}" loading="lazy">
+           <div class="meta">
+             <div class="title">${item.name}</div>
+             <div class="sub">Fresh & hot • 30–45 mins</div>
+           </div>
+           <div class="cta">
+             <div class="price">${fmt(item.price)}</div>
+             <button class="btn primary add-btn" data-id="${item.id}">
+               Add
+               <span id="qty-${item.id}" class="badge hidden">0</span>
+             </button>
+           </div>`;
         menuList.appendChild(card);
       });
+    }
+
+    function updateMenuQtyBadges(){
+      MENU.forEach(it=>{
+        const badge=document.getElementById(`qty-${it.id}`);
+        if(!badge) return;
+        const qty=state.cart[it.id]?.qty || 0;
+        badge.textContent=qty;
+        badge.classList.toggle('hidden', qty===0);
+      });
+    }
+
+    function updateCartBadge(){
+      const total=totalCount();
+      cartCount.textContent=total;
+      cartCount.classList.toggle('hidden', total===0);
     }
 
     function renderCart(){
       const items=Object.values(state.cart);
       cartList.innerHTML='';
-      if(items.length===0){ cartEmpty.hidden=false; cartList.hidden=true; }
-      else{
+      if(items.length===0){
+        cartEmpty.hidden=false; cartList.hidden=true;
+      }else{
         cartEmpty.hidden=true; cartList.hidden=false;
         items.forEach(c=>{
           const row=document.createElement('div');
           row.className='cart-row';
-          row.innerHTML=`<div>${c.item.name}</div>
-            <div class="qty">
-              <button class="btn secondary" data-minus="${c.item.id}">−</button>
-              <span>${c.qty}</span>
-              <button class="btn secondary" data-plus="${c.item.id}">+</button>
-            </div>
-            <div>${fmt(c.qty*c.item.price)}</div>`;
+          row.innerHTML=
+            `<div>${c.item.name}</div>
+             <div class="qty">
+               <button class="btn secondary" data-minus="${c.item.id}">−</button>
+               <span>${c.qty}</span>
+               <button class="btn secondary" data-plus="${c.item.id}">+</button>
+             </div>
+             <div>${fmt(c.qty*c.item.price)}</div>`;
           cartList.appendChild(row);
         });
       }
       const {sub,vat,grand}=totals();
-      subTotalEl.textContent=fmt(sub); vatEl.textContent=fmt(vat); grandTotalEl.textContent=fmt(grand);
+      subTotalEl.textContent=fmt(sub);
+      vatEl.textContent=fmt(vat);
+      grandTotalEl.textContent=fmt(grand);
+      updateMenuQtyBadges();
+      updateCartBadge();
     }
 
-    // Events
-    menuList.addEventListener('click',e=>{
-      if(e.target.dataset.id){
-        const id=+e.target.dataset.id;
-        const item=MENU.find(x=>x.id===id);
-        if(!state.cart[id]) state.cart[id]={item,qty:0};
-        state.cart[id].qty++;
-        Swal.fire({toast:true,position:'top-end',timer:1200,showConfirmButton:false,icon:'success',title:`${item.name} added`});
-        renderCart(); showPage('cart');
-      }
+    // ======= Events =======
+    menuList.addEventListener('click', e=>{
+      const btn=e.target.closest('.add-btn');
+      if(!btn) return;
+      const id=+btn.dataset.id;
+      const item=MENU.find(x=>x.id===id);
+      if(!state.cart[id]) state.cart[id]={item,qty:0};
+      state.cart[id].qty++;
+      // light toast (optional)
+      Swal.fire({toast:true,position:'top-end',timer:1000,showConfirmButton:false,icon:'success',title:`${item.name} added`});
+      renderCart(); // stays on same page (no routing)
     });
 
     cartList.addEventListener('click',e=>{
       const {minus,plus}=e.target.dataset;
-      if(minus){ const id=+minus; if(state.cart[id]){ state.cart[id].qty--; if(state.cart[id].qty<=0) delete state.cart[id]; } renderCart(); }
-      if(plus){ const id=+plus; if(state.cart[id]){ state.cart[id].qty++; } renderCart(); }
+      if(minus){
+        const id=+minus;
+        if(state.cart[id]){ state.cart[id].qty--; if(state.cart[id].qty<=0) delete state.cart[id]; }
+        renderCart();
+      }
+      if(plus){
+        const id=+plus;
+        if(state.cart[id]) state.cart[id].qty++;
+        renderCart();
+      }
     });
 
-    document.getElementById('clearCartBtn').addEventListener('click',()=>{ state.cart={}; renderCart(); });
+    document.getElementById('clearCartBtn').addEventListener('click',()=>{
+      state.cart={};
+      renderCart();
+    });
 
     document.getElementById('checkoutBtn').addEventListener('click',()=>{
-      if(Object.keys(state.cart).length===0){ Swal.fire('Cart Empty','Please add items before checkout.','warning'); return; }
-      document.getElementById('checkoutModal').showModal();
-    });
-    document.getElementById('cancelCheckoutBtn')?.addEventListener('click',(e)=>{ e.preventDefault(); document.getElementById('checkoutModal').close(); showPage('cart'); });
-
-    document.getElementById('orderForm').addEventListener('submit',e=>{
-      e.preventDefault();
-      const fd=new FormData(e.target);
-      const order={
-        id:`PF-${Date.now().toString().slice(-8)}`,
-        date:new Date(),
-        customer:{name:fd.get('name'),phone:fd.get('phone'),address:fd.get('address')},
-        payment:fd.get('payment'),
-        items:Object.values(state.cart).map(c=>({id:c.item.id,name:c.item.name,price:c.item.price,qty:c.qty,total:c.qty*c.item.price}))
-      };
-      const {sub,vat,grand}=totals();
-      order.subtotal=sub; order.vat=vat; order.total=grand; state.lastOrder=order;
-
-      // Reset & show invoice
-      state.cart={}; renderCart(); fillInvoice(order);
-      document.getElementById('checkoutModal').close();
-      Swal.fire({icon:'success',title:'Order Completed!',text:'Invoice generated for your order.'});
-      showPage('invoice');
+      if(Object.keys(state.cart).length===0){
+        Swal.fire('Cart empty','Please add items first.','warning'); return;
+      }
+      Swal.fire('Checkout','Proceed to checkout flow (to be implemented).','info');
     });
 
-    function fillInvoice(order){
-      invNo.textContent = `#${order.id}`;
-      invDate.textContent = order.date.toLocaleString();
-      billToName.textContent = order.customer.name;
-      billToPhone.textContent = order.customer.phone;
-      billToAddr.textContent = order.customer.address;
-      billPay.textContent = order.payment;
-      payStatus.textContent = order.payment==='COD' ? 'Unpaid (COD)' : 'Paid';
-
-      invBody.innerHTML='';
-      order.items.forEach(it=>{
-        const tr=document.createElement('tr');
-        tr.innerHTML=`<td>${it.name}</td><td>${it.qty}</td><td class="right">${fmt(it.price)}</td><td class="right">${fmt(it.total)}</td>`;
-        invBody.appendChild(tr);
-      });
-      tSub.textContent=fmt(order.subtotal); tVat.textContent=fmt(order.vat); tGrand.textContent=fmt(order.total);
+    function showPage(id){
+      document.querySelectorAll('section.page').forEach(s=>s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      window.scrollTo({top:0,behavior:'smooth'});
     }
-
-    document.getElementById('printInvoiceBtn').addEventListener('click',()=>window.print());
-
-    function showPage(id){ document.querySelectorAll('section.page').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); window.scrollTo({top:0,behavior:'smooth'}); highlightNav(id); }
-    document.querySelectorAll('[data-route]').forEach(btn=> btn.addEventListener('click',()=> showPage(btn.dataset.route)) );
-    document.querySelectorAll('.mobile-nav button').forEach(btn=> btn.addEventListener('click',()=> showPage(btn.dataset.route)) );
-
-    function highlightNav(id){ document.querySelectorAll('.mobile-nav button').forEach(b=>b.classList.toggle('active', b.dataset.route===id)); }
+    document.querySelectorAll('[data-route]').forEach(btn=>
+      btn.addEventListener('click',()=>showPage(btn.dataset.route))
+    );
 
     document.getElementById('y').textContent=new Date().getFullYear();
 
     // Init
-    renderMenu(); renderCart();
+    renderMenu();
+    renderCart();
   </script>
 </body>
 </html>
