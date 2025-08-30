@@ -11,7 +11,7 @@
     :root{
       --bg:#0b1220; --fg:#e5e7eb; --muted:#94a3b8; --card:#0f172a;
       --brand1:#2563eb; --brand2:#9333ea; --brand3:#f59e0b;
-      --radius:10px;
+      --radius:12px;
     }
     *{box-sizing:border-box}
     body{font-family:'Inter',sans-serif;background:#0b1220;margin:0;color:#e5e7eb}
@@ -23,19 +23,28 @@
     .brand{font-weight:800;display:flex;align-items:center;gap:8px}
 
     /* Buttons + badges */
-    .btn{padding:10px 14px;border-radius:8px;font-weight:700;cursor:pointer;border:none;position:relative;display:inline-flex;align-items:center;gap:6px}
+    .btn{padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;border:none;position:relative;display:inline-flex;align-items:center;gap:6px}
     .btn.primary{background:#2563eb;color:#fff}
     .btn.secondary{background:#334155;color:#fff}
     .btn.danger{background:#dc2626;color:#fff}
-    .badge{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:#0b1220;border:1px solid rgba(148,163,184,.35);color:#fff;font-size:12px;line-height:1;position:absolute;top:-6px;right:-6px}
-    .count-badge{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;border-radius:999px;background:#ef4444;color:#fff;font-size:11px;padding:0 5px;margin-left:6px}
+    .badge{
+      display:inline-flex;align-items:center;justify-content:center;
+      min-width:20px;height:20px;padding:0 6px;border-radius:999px;
+      background:#0b1220;border:1px solid rgba(148,163,184,.35);
+      color:#fff;font-size:12px;line-height:1;position:absolute;top:-6px;right:-6px
+    }
+    .count-badge{
+      display:inline-flex;align-items:center;justify-content:center;
+      min-width:18px;height:18px;border-radius:999px;background:#ef4444;
+      color:#fff;font-size:11px;padding:0 5px;margin-left:6px
+    }
     .hidden{display:none !important;}
 
     /* Layout */
     .container{padding:16px}
     .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
     .card{background:#1e293b;padding:12px;border-radius:var(--radius);box-shadow:0 2px 8px rgba(0,0,0,.3);display:flex;flex-direction:column}
-    .card img{width:100%;height:140px;object-fit:cover;border-radius:8px}
+    .card img{width:100%;height:150px;object-fit:cover;border-radius:10px}
     .meta{margin-top:8px}
     .title{font-weight:800;font-size:16px}
     .sub{color:var(--muted)}
@@ -43,7 +52,7 @@
     .price{font-weight:800}
 
     /* Cart */
-    .cart{background:#0f172a;padding:14px;border-radius:10px;margin-top:10px}
+    .cart{background:#0f172a;padding:14px;border-radius:12px;margin-top:10px}
     .cart-row{display:flex;justify-content:space-between;align-items:center;margin:6px 0}
     .cart-row .qty{display:flex;gap:6px;align-items:center}
     .cart-total{display:flex;justify-content:space-between;margin-top:8px}
@@ -54,10 +63,36 @@
     section.page{display:none}
     section.page.active{display:block}
 
-    /* Mobile tweaks */
+    /* Dialog */
+    dialog{border:none;border-radius:14px;width:92%;max-width:460px;padding:0;background:#0b1220;color:#e5e7eb}
+    dialog header{background:linear-gradient(90deg,#2563eb,#9333ea);padding:12px 14px;border-top-left-radius:14px;border-top-right-radius:14px}
+    dialog form{display:flex;flex-direction:column;gap:10px;padding:14px}
+    input,textarea,select{padding:12px;border-radius:10px;border:1px solid #334155;background:#0b1220;color:#fff;width:100%}
+    input:focus,textarea:focus,select:focus{outline:none;box-shadow:0 0 0 3px rgba(99,102,241,.35)}
+
+    /* Invoice (mobile-friendly) */
+    #invoice .paper{background:#fff;color:#0b1220;border-radius:14px;padding:14px}
+    #invoice .muted{color:#64748b}
+    #invoice .two-col{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    #invoice table{width:100%;border-collapse:collapse;margin-top:8px}
+    #invoice th,#invoice td{border-bottom:1px solid #e5e7eb;padding:8px;text-align:left}
+    #invoice .right{text-align:right}
+    #invoice .totals{display:grid;gap:6px;margin-top:10px}
+    #invoice .totals .row{display:flex;justify-content:space-between}
+
     @media(max-width:768px){
       .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
       .btn{padding:12px}
+      .card img{height:95px}              /* mobile: smaller food images */
+      #invoice .two-col{grid-template-columns:1fr} /* invoice stacks nicely */
+    }
+
+    /* Print: clean invoice only */
+    @media print{
+      header, footer, #home, #menu, #cart, dialog{display:none !important}
+      #invoice{display:block !important}
+      body{background:#fff;color:#000}
+      #invoice .paper{box-shadow:none;border:0;padding:0}
     }
   </style>
 </head>
@@ -84,7 +119,7 @@
 
   <section id="menu" class="container page">
     <h2>Menu</h2>
-    <div id="menuList" class="grid"></div>
+    <div id="menuList" class="grid" aria-live="polite"></div>
   </section>
 
   <section id="cart" class="container page">
@@ -105,6 +140,79 @@
     <p>Founded by <strong>Gazi Rifat Ahmed</strong> to modernize food ordering.</p>
   </section>
 
+  <!-- Invoice -->
+  <section id="invoice" class="container page">
+    <div class="paper">
+      <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center">
+        <div>
+          <h2>ProFood Invoice</h2>
+          <div class="muted">Rifat's Food House</div>
+        </div>
+        <div style="text-align:right">
+          <div id="invNo" style="font-weight:800">#PF-XXXX</div>
+          <div id="invDate" class="muted">Date</div>
+        </div>
+      </div>
+
+      <div class="two-col" style="margin-top:10px">
+        <div>
+          <strong>Billed To</strong>
+          <div id="billToName">—</div>
+          <div id="billToPhone" class="muted">—</div>
+          <div id="billToAddr" class="muted">—</div>
+        </div>
+        <div>
+          <strong>Payment</strong>
+          <div>Method: <span id="billPay">—</span></div>
+          <div>Status: <span id="payStatus">—</span></div>
+        </div>
+      </div>
+
+      <table id="invTable">
+        <thead><tr><th>Item</th><th>Qty</th><th class="right">Price</th><th class="right">Total</th></tr></thead>
+        <tbody></tbody>
+      </table>
+
+      <div class="totals">
+        <div class="row"><span>Subtotal</span><span id="tSub">৳0</span></div>
+        <div class="row"><span>VAT (5%)</span><span id="tVat">৳0</span></div>
+        <div class="row"><strong>Grand Total</strong><strong id="tGrand">৳0</strong></div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn secondary" data-route="menu">Back to Menu</button>
+        <button id="printInvoiceBtn" class="btn primary">Print / Download</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Checkout dialog -->
+  <dialog id="checkoutModal">
+    <header><h3>Complete your order</h3></header>
+    <form id="orderForm">
+      <label>Name
+        <input name="name" required autocomplete="name" inputmode="text">
+      </label>
+      <label>Phone
+        <input name="phone" required autocomplete="tel" inputmode="tel" pattern="[0-9]{11}">
+      </label>
+      <label>Address
+        <textarea name="address" rows="3" required placeholder="House, Road, Area, City"></textarea>
+      </label>
+      <label>Payment
+        <select name="payment" required>
+          <option value="COD">Cash on Delivery</option>
+          <option value="bKash">bKash</option>
+          <option value="Nagad">Nagad</option>
+        </select>
+      </label>
+      <div style="display:flex;gap:8px;justify-content:flex-end">
+        <button type="reset" class="btn secondary" id="cancelCheckoutBtn">Cancel</button>
+        <button type="submit" class="btn primary">Confirm Order</button>
+      </div>
+    </form>
+  </dialog>
+
   <footer>© <span id="y"></span> ProFood</footer>
 
   <script>
@@ -123,7 +231,7 @@
     ];
 
     // ======= State & Elements =======
-    const state={cart:{}}; // cart: { [id]: {item, qty} }
+    const state={cart:{}, lastOrder:null}; // cart: { [id]: {item, qty} }
     const menuList=document.getElementById('menuList');
     const cartList=document.getElementById('cartList');
     const cartEmpty=document.getElementById('cartEmpty');
@@ -131,6 +239,19 @@
     const subTotalEl=document.getElementById('subTotal');
     const vatEl=document.getElementById('vat');
     const grandTotalEl=document.getElementById('grandTotal');
+
+    // Invoice elements
+    const invNo=document.getElementById('invNo');
+    const invDate=document.getElementById('invDate');
+    const billToName=document.getElementById('billToName');
+    const billToPhone=document.getElementById('billToPhone');
+    const billToAddr=document.getElementById('billToAddr');
+    const billPay=document.getElementById('billPay');
+    const payStatus=document.getElementById('payStatus');
+    const invBody=document.querySelector('#invTable tbody');
+    const tSub=document.getElementById('tSub');
+    const tVat=document.getElementById('tVat');
+    const tGrand=document.getElementById('tGrand');
 
     const fmt=n=>`৳${n}`;
     const totalCount=()=>Object.values(state.cart).reduce((s,c)=>s+c.qty,0);
@@ -141,6 +262,7 @@
       return {sub,vat,grand:sub+vat};
     }
 
+    // ======= Renderers =======
     function renderMenu(){
       menuList.innerHTML='';
       MENU.forEach(item=>{
@@ -161,22 +283,7 @@
            </div>`;
         menuList.appendChild(card);
       });
-    }
-
-    function updateMenuQtyBadges(){
-      MENU.forEach(it=>{
-        const badge=document.getElementById(`qty-${it.id}`);
-        if(!badge) return;
-        const qty=state.cart[it.id]?.qty || 0;
-        badge.textContent=qty;
-        badge.classList.toggle('hidden', qty===0);
-      });
-    }
-
-    function updateCartBadge(){
-      const total=totalCount();
-      cartCount.textContent=total;
-      cartCount.classList.toggle('hidden', total===0);
+      updateMenuQtyBadges(); // reflect existing cart if any
     }
 
     function renderCart(){
@@ -208,6 +315,22 @@
       updateCartBadge();
     }
 
+    function updateMenuQtyBadges(){
+      MENU.forEach(it=>{
+        const badge=document.getElementById(`qty-${it.id}`);
+        if(!badge) return;
+        const qty=state.cart[it.id]?.qty || 0;
+        badge.textContent=qty;
+        badge.classList.toggle('hidden', qty===0);
+      });
+    }
+
+    function updateCartBadge(){
+      const total=totalCount();
+      cartCount.textContent=total;
+      cartCount.classList.toggle('hidden', total===0);
+    }
+
     // ======= Events =======
     menuList.addEventListener('click', e=>{
       const btn=e.target.closest('.add-btn');
@@ -216,9 +339,9 @@
       const item=MENU.find(x=>x.id===id);
       if(!state.cart[id]) state.cart[id]={item,qty:0};
       state.cart[id].qty++;
-      // light toast (optional)
-      Swal.fire({toast:true,position:'top-end',timer:1000,showConfirmButton:false,icon:'success',title:`${item.name} added`});
-      renderCart(); // stays on same page (no routing)
+      // Toast bottom-right (professional)
+      Swal.fire({toast:true,position:'bottom-end',timer:1100,showConfirmButton:false,icon:'success',title:`${item.name} added`});
+      renderCart(); // stay on menu
     });
 
     cartList.addEventListener('click',e=>{
@@ -226,11 +349,13 @@
       if(minus){
         const id=+minus;
         if(state.cart[id]){ state.cart[id].qty--; if(state.cart[id].qty<=0) delete state.cart[id]; }
+        Swal.fire({toast:true,position:'bottom-end',timer:800,showConfirmButton:false,icon:'info',title:'Updated'});
         renderCart();
       }
       if(plus){
         const id=+plus;
         if(state.cart[id]) state.cart[id].qty++;
+        Swal.fire({toast:true,position:'bottom-end',timer:800,showConfirmButton:false,icon:'info',title:'Updated'});
         renderCart();
       }
     });
@@ -238,14 +363,66 @@
     document.getElementById('clearCartBtn').addEventListener('click',()=>{
       state.cart={};
       renderCart();
+      Swal.fire({toast:true,position:'bottom-end',timer:1000,showConfirmButton:false,icon:'warning',title:'Cart cleared'});
     });
 
     document.getElementById('checkoutBtn').addEventListener('click',()=>{
       if(Object.keys(state.cart).length===0){
-        Swal.fire('Cart empty','Please add items first.','warning'); return;
+        Swal.fire({toast:true,position:'bottom-end',timer:1400,showConfirmButton:false,icon:'warning',title:'Cart empty'});
+        return;
       }
-      Swal.fire('Checkout','Proceed to checkout flow (to be implemented).','info');
+      document.getElementById('checkoutModal').showModal();
     });
+
+    document.getElementById('cancelCheckoutBtn').addEventListener('click',(e)=>{
+      e.preventDefault();
+      document.getElementById('checkoutModal').close();
+    });
+
+    document.getElementById('orderForm').addEventListener('submit',e=>{
+      e.preventDefault();
+      const fd=new FormData(e.target);
+      const order={
+        id:`PF-${Date.now().toString().slice(-8)}`,
+        date:new Date(),
+        customer:{name:fd.get('name'),phone:fd.get('phone'),address:fd.get('address')},
+        payment:fd.get('payment'),
+        items:Object.values(state.cart).map(c=>({name:c.item.name,price:c.item.price,qty:c.qty,total:c.qty*c.item.price}))
+      };
+      const {sub,vat,grand}=totals();
+      order.subtotal=sub; order.vat=vat; order.total=grand;
+      state.lastOrder=order;
+
+      // reset cart + route to invoice
+      state.cart={};
+      renderCart();
+      fillInvoice(order);
+      document.getElementById('checkoutModal').close();
+      Swal.fire({toast:true,position:'bottom-end',timer:1500,showConfirmButton:false,icon:'success',title:'Order Completed!'});
+      showPage('invoice');
+    });
+
+    function fillInvoice(order){
+      invNo.textContent = `#${order.id}`;
+      invDate.textContent = order.date.toLocaleString();
+      billToName.textContent = order.customer.name;
+      billToPhone.textContent = order.customer.phone;
+      billToAddr.textContent = order.customer.address;
+      billPay.textContent = order.payment;
+      payStatus.textContent = order.payment==='COD' ? 'Unpaid (COD)' : 'Paid';
+
+      invBody.innerHTML='';
+      order.items.forEach(it=>{
+        const tr=document.createElement('tr');
+        tr.innerHTML=`<td>${it.name}</td><td>${it.qty}</td><td class="right">${fmt(it.price)}</td><td class="right">${fmt(it.total)}</td>`;
+        invBody.appendChild(tr);
+      });
+      tSub.textContent=fmt(order.subtotal);
+      tVat.textContent=fmt(order.vat);
+      tGrand.textContent=fmt(order.total);
+    }
+
+    document.getElementById('printInvoiceBtn').addEventListener('click',()=>window.print());
 
     function showPage(id){
       document.querySelectorAll('section.page').forEach(s=>s.classList.remove('active'));
